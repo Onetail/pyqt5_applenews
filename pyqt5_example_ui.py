@@ -1,10 +1,15 @@
 import sys
 import requests
-from PyQt5.QtWidgets import QApplication ,QWidget, QPushButton,QTextEdit , QVBoxLayout
+from PyQt5.QtWidgets import QApplication ,QWidget,QHBoxButton, QPushButton,QTextEdit , QVBoxLayout
 from PyQt5.QtGui import QFont
 from bs4 import BeautifulSoup
 
 class init_ui(QWidget):	# ui interface to create
+	global array,namelist
+	global num,y
+	num = 0
+	array = ["","headline","entertainment","international","sports","finance"]
+	namelist = ["今日熱門","頭條","娛樂","國際","運動","金融"]
 	def __init__(self):
 		super().__init__()
 		self.ui()
@@ -35,15 +40,32 @@ class init_ui(QWidget):	# ui interface to create
 		self.show()
 	# push btn to search url
 	def search(self):
-		x = ""
+		global num
+		global y
+		# print(num)
 		self.text.setFont(QFont("標楷體",15,30,False))
-		res = requests.get('http://www.appledaily.com.tw/appledaily/hotdaily/')
-		res.encoding = 'utf=8'
-		soup = BeautifulSoup(res.text,"html.parser")
-		x += (soup.select('time')[0].text)+"\n"
-		for i in range(0,30):
-			x+= "%2d." % int(i+1)+soup.select('.aht_title')[i].text+"*"+soup.select('.aht_pv_num')[i].text+"\n"
-		self.text.setText(x)
+		if num == 0:
+			y = "" # save the url get details
+			for j in range(0,len(array)):
+			# 例外處理 try for solution
+				try:
+					res = requests.get('http://www.appledaily.com.tw/appledaily/hotdaily/'+array[j])
+					res.encoding = 'utf=8'
+					soup = BeautifulSoup(res.text,"html.parser")
+			# x+=soup.select('time')[0].text+"\n"
+				except:
+					self.text.setText("發生錯誤! 請檢察網路連線------")
+					break
+				y += namelist[j] + ":\n"
+				try:
+					for i in range(0,31):
+						y +="%2d." % int(i+1)+soup.select('.aht_title')[i].text+" *"+soup.select('.aht_pv_num')[i].text+"\n"
+				except:
+					y += "\n"
+			self.text.setText(y)
+			num = 1
+		else:
+			self.text.setText(y)
 	# push btn2 to know author things
 	def author(self):
 		x = ""
