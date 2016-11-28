@@ -3,7 +3,7 @@ import requests
 from PyQt5.QtWidgets import QApplication ,QWidget,QHBoxButton, QPushButton,QTextEdit , QVBoxLayout
 from PyQt5.QtGui import QFont
 from bs4 import BeautifulSoup
-
+#123123
 class init_ui(QWidget):	# ui interface to create
 	global array,namelist
 	global num,y
