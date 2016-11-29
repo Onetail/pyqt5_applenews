@@ -1,7 +1,8 @@
 import time
 import sys
 import requests
-from PyQt5.QtWidgets import QRadioButton,QLabel,QApplication ,QWidget,QHBoxLayout,QPushButton,QTextEdit , QVBoxLayout
+import frame2 
+from PyQt5.QtWidgets import QRadioButton,QLabel,QApplication ,QWidget,QHBoxLayout,QPushButton,QTextEdit , QVBoxLayout , QFileDialog
 from PyQt5.QtGui import QFont,QColor
 from bs4 import BeautifulSoup
 
@@ -42,7 +43,8 @@ class init_ui(QWidget):	# ui interface to create
 		btn.setStyleSheet(Colordatabase[0])
 		btn2 = QPushButton("關於",self)	# author introduce 
 		btn2.clicked.connect(self.author)
-
+		btn3 = QPushButton("Intent",self)
+		btn3.clicked.connect(self.newFrame)
 		# text to show main screen
 		self.text = QTextEdit("",self)
 		self.text.setReadOnly(True)
@@ -56,6 +58,7 @@ class init_ui(QWidget):	# ui interface to create
 		radioname[0].clicked.connect(self.radiofunction1)
 		radioname[1].clicked.connect(self.radiofunction2)
 		radioname[2].clicked.connect(self.radiofunction3)
+		rightlayout.addWidget(btn3)
 		bottomlayout = QVBoxLayout()
 		bottomlayout.addWidget(btn)
 		bottomlayout.addWidget(btn2)
@@ -108,6 +111,11 @@ class init_ui(QWidget):	# ui interface to create
 		else:
 			self.text.setText(y)
 		self.Timeget()	# time change
+	# to save the search details
+	# to make designer for save & see
+	def newFrame(self):
+
+		frame2.call()
 	# push btn2 to know author things
 	def author(self):
 		x = ""
