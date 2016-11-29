@@ -31,7 +31,7 @@ class init_ui(QWidget):	# ui interface to create
 	def ui(self):
 		# know radiobutton was pushed
 		radiobtncontrol = 0
-		stime = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+		
 		self.resize(1200,800)
 
 		self.setWindowTitle("apples爬蟲")
@@ -46,9 +46,8 @@ class init_ui(QWidget):	# ui interface to create
 		# text to show main screen
 		self.text = QTextEdit("",self)
 		self.text.setReadOnly(True)
-		self.timelook = QLabel(str(stime),self)
+		self.timelook = QLabel("",self)
 		#Layout
-
 		rightlayout = QVBoxLayout()
 
 		for radioi in range(0,3):
@@ -72,13 +71,13 @@ class init_ui(QWidget):	# ui interface to create
 		self.setLayout(mainlayout)
 		
 		# show
+		self.Timeget()
 		self.show()
 	# push btn to search url
 	def search(self):
 		global num
 		global y
 		global Maxtitle
-		# print(num)
 
 		self.text.setFont(Fontdatabase[0])
 		if num == 0:
@@ -108,22 +107,32 @@ class init_ui(QWidget):	# ui interface to create
 			num = 1
 		else:
 			self.text.setText(y)
+		self.Timeget()	# time change
 	# push btn2 to know author things
 	def author(self):
 		x = ""
 		self.text.setFont(Fontdatabase[1])
 		x += "作者: Wayne\n開發時間: 2016/11/25 "
 		self.text.setText(x)
+		self.Timeget()
 	# radio function def
 	def radiofunction1(self):
 		self.text.setFont(Fontdatabase[2])
 		self.text.setText("1")
+		self.Timeget()
 	def radiofunction2(self):
 		self.text.setFont(Fontdatabase[2])
 		self.text.setText("2")
+		self.Timeget()
 	def radiofunction3(self):
 		self.text.setFont(Fontdatabase[2])
 		self.text.setText("3")
+		self.Timeget()
+	# make user know the time now
+	def Timeget(self):
+		global stime
+		stime = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+		self.timelook.setText(str(stime))
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
