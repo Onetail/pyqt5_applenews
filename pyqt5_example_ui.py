@@ -1,7 +1,6 @@
 import time
 import sys
 import requests
-import frame2 
 from PyQt5.QtWidgets import QRadioButton,QLabel,QApplication ,QWidget,QHBoxLayout,QPushButton,QTextEdit , QVBoxLayout , QFileDialog
 from PyQt5.QtGui import QFont,QColor
 from bs4 import BeautifulSoup
@@ -150,7 +149,7 @@ class init_ui(QWidget):	# ui interface to create
 		stime = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
 		self.timelook.setText(str(stime))
 
-if __name__ == '__main__':
-	app = QApplication(sys.argv)
-	ui_run = init_ui()
-	sys.exit(app.exec_())
+
+app = QApplication(sys.argv)
+ui_run = init_ui()
+sys.exit(app.exec_())
