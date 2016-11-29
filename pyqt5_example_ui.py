@@ -34,7 +34,6 @@ class init_ui(QWidget):	# ui interface to create
 		radiobtncontrol = 0
 		
 		self.resize(1200,800)
-
 		self.setWindowTitle("apples爬蟲")
 		# Button
 
@@ -49,7 +48,9 @@ class init_ui(QWidget):	# ui interface to create
 		self.text = QTextEdit("",self)
 		self.text.setReadOnly(True)
 		self.timelook = QLabel("",self)
+
 		#Layout
+		
 		rightlayout = QVBoxLayout()
 
 		for radioi in range(0,3):
@@ -114,8 +115,16 @@ class init_ui(QWidget):	# ui interface to create
 	# to save the search details
 	# to make designer for save & see
 	def newFrame(self):
-
-		frame2.call()
+		# dlg = QFileDialog()
+		# dlg.setFileMode(QFileDialog.AnyFile)
+		# dlg.setFilter("Text files (*.txt)")
+		# filenames = QStringList()
+		# if dlg.exec_():
+		# 	filenames = dlg.selectedFiles()
+		fopen = open("爬蟲文件.txt","w")
+		fopen.write(self.text.toPlainText())
+		fopen.close()
+		
 	# push btn2 to know author things
 	def author(self):
 		x = ""
