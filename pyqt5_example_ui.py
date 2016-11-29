@@ -115,15 +115,15 @@ class init_ui(QWidget):	# ui interface to create
 	# to save the search details
 	# to make designer for save & see
 	def newFrame(self):
-		# dlg = QFileDialog()
-		# dlg.setFileMode(QFileDialog.AnyFile)
-		# dlg.setFilter("Text files (*.txt)")
-		# filenames = QStringList()
-		# if dlg.exec_():
-		# 	filenames = dlg.selectedFiles()
-		fopen = open("爬蟲文件.txt","w")
-		fopen.write(self.text.toPlainText())
-		fopen.close()
+		
+		fopen = QFileDialog.getOpenFileName(self,"Open file")
+
+		self.text.setText(fopen.key())
+		
+		ff = open("爬蟲文件.txt","w")
+		ff.write(self.text.toPlainText())
+		ff.close()
+
 		
 	# push btn2 to know author things
 	def author(self):
