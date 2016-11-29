@@ -83,11 +83,11 @@ class init_ui(QWidget):	# ui interface to create
 		global y
 		global Maxtitle
 
-		self.text.setFont(Fontdatabase[0])
+		self.text.setFont(Fontdatabase[0]) 
 		if num == 0:
 			Maxtitle=""
 			y = "" # save the url get details
-			y += "----蘋果新聞----\n"
+			y += "----蘋果新聞----\n搜尋時間: "+time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())+"\n\n"
 			for j in range(0,len(array)):
 			# 例外處理 try for solution
 				try:
@@ -115,14 +115,13 @@ class init_ui(QWidget):	# ui interface to create
 	# to save the search details
 	# to make designer for save & see
 	def newFrame(self):
+		fopen = QFileDialog.getSaveFileName(self,"Open file","爬蟲detail.txt","(*.txt);;(*.py)")
 		
-		fopen = QFileDialog.getOpenFileName(self,"Open file")
-
-		self.text.setText(fopen.key())
-		
-		ff = open("爬蟲文件.txt","w")
-		ff.write(self.text.toPlainText())
-		ff.close()
+		if fopen[0]:
+			ff = open(fopen[0],"w")
+			ff.write(self.text.toPlainText())
+			ff.close()
+		# self.text.setText()
 
 		
 	# push btn2 to know author things
