@@ -1,3 +1,4 @@
+# coding = UTF8
 import time
 import sys
 import requests
@@ -115,9 +116,8 @@ class init_ui(QWidget):	# ui interface to create
 	# to make designer for save & see
 	def newFrame(self):
 		fopen = QFileDialog.getSaveFileName(self,"Open file","爬蟲detail.txt","(*.txt);;(*.py)")
-		
 		if fopen[0]:
-			ff = open(fopen[0],"w")
+			ff = open(fopen[0],'w',encoding='utf8')
 			ff.write(self.text.toPlainText())
 			ff.close()
 		# self.text.setText()
